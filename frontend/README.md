@@ -1,70 +1,164 @@
-# Getting Started with Create React App
+# 🎓 Blockchain Certificate Generator & Verifier dApp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> A full-stack decentralized application to issue and verify blockchain-backed certificates using Ethereum/Polygon smart contracts.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Live Demo
 
-### `npm start`
+🌐 [Visit the App](https://vighneshb04.github.io/blockchain-certificate/)  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 💡 What It Does
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- ✅ Issue tamper-proof certificates on-chain  
+- 🔐 Each certificate has a unique credential hash  
+- 🌍 Anyone can verify a certificate using its hash  
+- 📄 Downloadable PDF certificates with embedded credential IDs  
+- 🦊 MetaMask wallet integration  
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Layer        | Tech                                       |
+|--------------|--------------------------------------------|
+| Smart Contract | Solidity, Ethereum/Polygon Mainnet      |
+| Frontend     | React.js, Material UI, Web3.js             |
+| PDF          | @react-pdf/renderer                        |
+| Backend      | Firebase Firestore (for student metadata)  |
+| Hosting      | GitHub Pages / Vercel / Netlify            |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 📦 Features
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 👨‍🎓 **Generate Certificate**:
+  - Connect wallet (MetaMask)
+  - Enter student ID & course
+  - Hash is generated and stored on-chain
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 🔍 **Verify Certificate**:
+  - Paste the certificate hash
+  - Pulls data from blockchain
+  - Shows student name, course, date
+  - Option to download PDF version
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- 🛡️ **Immutable Credential ID**:
+  - Generated using SHA3 with timestamp + Firebase ID
+  - Cannot be faked or altered
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🧱 Smart Contract
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```solidity
+struct CertData {
+  string studentName;
+  string course;
+  uint256 issueDate;
+  string firebaseId;
+}
+mapping(string => CertData) private certificates;
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `generateCertificate()` → Owner-only function to register certificates  
+- `verifyCertificate(hash)` → Public function to validate any certificate  
 
-### Code Splitting
+✅ [View Full Contract Code](contracts/Certificate.sol)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 🔧 Local Development Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+git clone https://github.com/vighneshb04/blockchain-certificate.git
+cd blockchain_certificate/frontend
+npm install
+```
 
-### Making a Progressive Web App
+Create `.env`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+REACT_APP_CONTRACT_ADDRESS=
+```
 
-### Advanced Configuration
+Run the app locally:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm start
+```
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📤 Deploy Smart Contract (Mainnet / Polygon)
 
-### `npm run build` fails to minify
+Using **Hardhat** (optional, if you redeploy on chain):
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npx hardhat run scripts/deploy.js --network polygon
+```
+
+Update the deployed address in `.env`:
+
+```bash
+REACT_APP_CONTRACT_ADDRESS=0xNewDeployedContract
+```
+
+Then rebuild frontend:
+
+```bash
+npm run build
+```
+
+Push to GitHub or deploy on Vercel / Netlify.
+
+---
+
+## 🌍 Global Verification Support
+
+✅ The smart contract is deployed on a public chain (Polygon).  
+✅ Anyone with any MetaMask account can verify any credential hash.  
+✅ No login or centralized backend is required to verify certificates.
+
+---
+
+
+
+## 🔐 Security & Notes
+
+- Only the contract **owner** can generate certificates  
+- Credential hash is **SHA3-based** and timestamped  
+- Data stored on-chain is immutable
+
+---
+
+## 🧠 Future Upgrades
+
+- Certificate dashboard & filtering  
+- Revocation support  
+- IPFS PDF anchoring  
+- ERC-721 NFT-based certificates  
+- ENS domain integration  
+
+---
+
+## 👨‍💻 Author
+
+**Vighnesh B**  
+💼 Blockchain/Web Developer   
+🔗 [LinkedIn](https://www.linkedin.com/in/vighnesh-b-b9391b291/) • [GitHub](https://github.com/vighneshb04)
+
+**Keerthana Sai Gazula**  
+💼 Blockchain/Web Developer  
+🔗 [LinkedIn](https://www.linkedin.com/in/keerthana-sai-gazula-4013b927a/) • [GitHub](https://github.com/KeerthanaG2)
+
+---
+
+## 📜 License
+
+MIT License – free to use, modify, and distribute for educational and commercial purposes.
+
+---
