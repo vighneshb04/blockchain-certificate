@@ -24,9 +24,9 @@ contract Certificate {
         string memory _course,
         string memory _firebaseId
     ) external {
-        require(msg.sender == owner, "Only owner can generate certificates");
+        // ✅ Removed owner check so anyone can call
         require(bytes(_firebaseId).length > 0, "Invalid Firebase ID");
-        
+
         certificates[_certHash] = CertData(
             _name,
             _course,

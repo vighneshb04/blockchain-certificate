@@ -18,7 +18,7 @@ function App() {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
         const accounts = await web3.eth.getAccounts();
         setAccount(accounts[0]);
-        const contractAddress = '0xD450625ec80e922D23b560429814cD52B267364F'; // Replace with your deployed contract address
+        const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS; // Replace with your deployed contract address
         const contractInstance = new web3.eth.Contract(ABI, contractAddress);
         setContract(contractInstance);
       }
