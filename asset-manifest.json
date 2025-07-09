@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/blockchain-certificate/static/css/main.e6c13ad2.css",
-    "main.js": "/blockchain-certificate/static/js/main.21e3a5b6.js",
+    "main.js": "/blockchain-certificate/static/js/main.a49b99d8.js",
     "static/js/453.232da9e9.chunk.js": "/blockchain-certificate/static/js/453.232da9e9.chunk.js",
     "static/media/certificate.jpg": "/blockchain-certificate/static/media/certificate.26831532c6e56015ff87.jpg",
     "index.html": "/blockchain-certificate/index.html",
     "main.e6c13ad2.css.map": "/blockchain-certificate/static/css/main.e6c13ad2.css.map",
-    "main.21e3a5b6.js.map": "/blockchain-certificate/static/js/main.21e3a5b6.js.map",
+    "main.a49b99d8.js.map": "/blockchain-certificate/static/js/main.a49b99d8.js.map",
     "453.232da9e9.chunk.js.map": "/blockchain-certificate/static/js/453.232da9e9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.21e3a5b6.js"
+    "static/js/main.a49b99d8.js"
   ]
 }
